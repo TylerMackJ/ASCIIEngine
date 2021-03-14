@@ -2,8 +2,8 @@
 
 int main()
 {
-    Renderer r = Renderer(25,10);
-    r.Tri(new int[2]{5, 5}, new int[2]{21, 7}, new int[2]{20, 3});
+    Renderer r = Renderer(25, 10, 1);
+    r.Tri( {5, 5}, {20, 3}, {15, 7} );
     for(int i = 0; i < 1; i++)
     {
         r.Draw();

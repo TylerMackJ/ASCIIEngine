@@ -3,3 +3,6 @@ all : bin/
 
 bin/ : 
 	mkdir bin
+
+clean :
+	rm -r ./bin
