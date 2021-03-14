@@ -23,6 +23,11 @@ Renderer::Triangle::Triangle(struct coordinate* points) : point(points)
     }
 }
 
+Renderer::Triangle::~Triangle()
+{
+    delete[] point;
+}
+
 void Renderer::Triangle::changePoint(const int point, const struct coordinate pos)
 {
     this->point[point] = pos;

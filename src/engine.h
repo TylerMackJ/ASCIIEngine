@@ -20,6 +20,7 @@ private:
         int maxX, minX, maxY, minY;
 
         Triangle(struct coordinate* points);
+        ~Triangle();
 
         void changePoint(const int point, const struct coordinate pos);
 
@@ -34,6 +35,8 @@ public:
     std::vector<Triangle*> triangles = std::vector<Triangle*>();
 public:
     Renderer(const int width, const int height, const uint8_t newline);
+    ~Renderer();
+
     const int getWidth() const;
     const int getHeight() const;
 
