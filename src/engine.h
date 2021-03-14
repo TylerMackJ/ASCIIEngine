@@ -9,20 +9,21 @@ class Renderer
 public:
     struct coordinate
     {
-        int x, y;
+        double x, y;
     };
-private:
+public:
     class Triangle
     {
     public:
         struct coordinate* point;
 
-        int maxX, minX, maxY, minY;
+        double maxX, minX, maxY, minY;
 
         Triangle(struct coordinate* points);
         ~Triangle();
 
         void changePoint(const int point, const struct coordinate pos);
+        void rotateAround(const struct coordinate point, const double radian);
 
         static float area(const struct coordinate a, const struct coordinate b, const struct coordinate c);
         static uint8_t inside(const struct coordinate p, const struct coordinate a, const struct coordinate b, const struct coordinate c);
@@ -40,7 +41,7 @@ public:
     const int getWidth() const;
     const int getHeight() const;
 
-    void tri(const struct coordinate c1, const struct coordinate c2, const struct coordinate c3);
+    Triangle& tri(const struct coordinate c1, const struct coordinate c2, const struct coordinate c3);
 
     void draw() const;
 };

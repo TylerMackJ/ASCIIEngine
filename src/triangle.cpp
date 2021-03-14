@@ -43,6 +43,16 @@ void Renderer::Triangle::changePoint(const int point, const struct coordinate po
         minY = pos.y;
 }
 
+void Renderer::Triangle::rotateAround(const struct coordinate point, const double radian) 
+{
+    for (int i = 0; i < 3; i++)
+    {
+        double xNew = (this->point[i].x - point.x) * cos(radian) - (this->point[i].y - point.y) * sin(radian) + point.x;
+        double yNew = (this->point[i].x - point.y) * sin(radian) + (this->point[i].y - point.y) * cos(radian) + point.y;
+        this->changePoint(i, {xNew, yNew});
+    }
+}
+
 
 float Renderer::Triangle::area(const struct coordinate a, const struct coordinate b, const struct coordinate c)
 {
@@ -55,5 +65,5 @@ uint8_t Renderer::Triangle::inside(const struct coordinate p, const struct coord
     float a2 = Renderer::Triangle::area(a, p, c);
     float a3 = Renderer::Triangle::area(a, b, p);
 
-    return (.1 > a1 + a2 + a3 - a0);
+    return (.1f > a1 + a2 + a3 - a0);
 }
