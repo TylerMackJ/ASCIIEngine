@@ -32,9 +32,9 @@ void Renderer::draw() const
     
     for (Triangle* const tri : this->triangles)
     {
-        for(int x = tri->minX; x <= tri->maxX; x++) 
+        for(int x = tri->minX > 0 ? tri->minX : 0; x <= tri->maxX && x <= this->getWidth(); x++) 
         {
-            for(int y = tri->minY; y <= tri->maxY; y++)
+            for(int y = tri->minY > 0 ? tri->minY : 0; y <= tri->maxY && y <= this->getHeight(); y++)
             {
                 if (Renderer::Triangle::inside({x, y}, tri->point[0], tri->point[1], tri->point[2]))
                 {

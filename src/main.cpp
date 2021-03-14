@@ -5,9 +5,9 @@
 
 int main()
 {
-    Renderer r = Renderer(40, 20, 1);
+    Renderer r = Renderer(90, 29, 1);
     r.tri( {5, 5}, {35, 3}, {15, 7} );
-    for(int i = 0; i < 60; i++)
+    for(int i = 0; i < 120; i++)
     {
         const std::chrono::high_resolution_clock::time_point frameStart = std::chrono::high_resolution_clock::now() + std::chrono::milliseconds(16);
 
