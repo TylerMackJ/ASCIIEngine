@@ -1,8 +1,13 @@
+SRCS := ${shell find ./src -name *.c*}
+
 all : bin/
-	g++ src/* -o bin/engine
+	g++ ${SRCS} -o bin/engine
 
 bin/ : 
 	mkdir bin
+
+gdb : bin/
+	g++ -Wall -g ${SRCS} -o bin/engine
 
 clean :
 	rm -r ./bin

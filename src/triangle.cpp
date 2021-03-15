@@ -23,6 +23,11 @@ Renderer::Triangle::Triangle(struct coordinate* points) : point(points)
     }
 }
 
+Renderer::Triangle::~Triangle()
+{
+    delete[] point;
+}
+
 void Renderer::Triangle::changePoint(const int point, const struct coordinate pos)
 {
     this->point[point] = pos;
@@ -38,6 +43,34 @@ void Renderer::Triangle::changePoint(const int point, const struct coordinate po
         minY = pos.y;
 }
 
+struct Renderer::coordinate Renderer::Triangle::getCenter()
+{
+    return {(this->point[0].x + this->point[1].x + this->point[2].x) / 3.0, (this->point[0].y + this->point[1].y + this->point[2].y) / 3.0};
+}
+
+void Renderer::Triangle::rotateAround(const struct coordinate point, const double radian) 
+{
+    for (int i = 0; i < 3; i++)
+    {
+        double x = this->point[i].x;
+        double y = this->point[i].y;
+
+        double s = sin(radian);
+        double c = cos(radian);
+
+        x -= point.x;
+        y -= point.y;
+
+
+        double xNew = x * c - y * s;
+        double yNew = x * s + y * c;
+
+        
+
+        this->changePoint(i, {xNew + point.x, yNew + point.y});
+    }
+}
+
 
 float Renderer::Triangle::area(const struct coordinate a, const struct coordinate b, const struct coordinate c)
 {
@@ -50,5 +83,5 @@ uint8_t Renderer::Triangle::inside(const struct coordinate p, const struct coord
     float a2 = Renderer::Triangle::area(a, p, c);
     float a3 = Renderer::Triangle::area(a, b, p);
 
-    return (.1 > a1 + a2 + a3 - a0);
+    return (.1f > a1 + a2 + a3 - a0);
 }
