@@ -1,13 +1,14 @@
 #include <chrono>
 #include <thread>
-#include <cmath>
+
+#define M_PI 3.14159265358979323846
 
 #include "engine.h"
 
 int main()
 {
     Renderer r = Renderer(90, 29, 1);
-    Renderer::Triangle& t = r.tri( {5, 5}, {35, 3}, {40, 20} );
+    Renderer::Triangle& t = r.tri( {500, 500}, {-500, -500}, {0, 25} );
     for(int i = 0; i < 200; i++)
     {
         const std::chrono::high_resolution_clock::time_point frameStart = std::chrono::high_resolution_clock::now() + std::chrono::milliseconds(16);

@@ -28,7 +28,8 @@ void Renderer::draw() const
 {
     const int frameSize = this->getHeight() * this->getWidth();
 
-    char* const frame = new char[frameSize];
+    static char* const frame = new char[frameSize];
+
     memset(frame, ' ', frameSize);
 
     // Draw newlines on frame edge
@@ -64,5 +65,5 @@ void Renderer::draw() const
     }
 
     // Draw frame
-    fwrite(frame, sizeof(char), frameSize, stdout);
+    fwrite(frame, sizeof(char), frameSize, stderr);
 }
