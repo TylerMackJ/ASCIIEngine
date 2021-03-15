@@ -62,6 +62,10 @@ void Renderer::draw() const
             frame[tri->point[i].x + (this->getWidth() * tri->point[i].y)] = '+';
         }
         */
+        // Draw triangle center for debug
+        struct coordinate center = tri->getCenter();
+        if (center.x >= 0 && center.x < this->getWidth() && center.y >= 0 && center.y < this->getHeight())
+            frame[(int)tri->getCenter().x + (this->getWidth() * (int)tri->getCenter().y)] = '*';
     }
 
     // Draw frame

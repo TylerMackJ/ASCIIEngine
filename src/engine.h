@@ -25,6 +25,8 @@ public:
         void changePoint(const int point, const struct coordinate pos);
         void rotateAround(const struct coordinate point, const double radian);
 
+        struct coordinate getCenter();
+
         static float area(const struct coordinate a, const struct coordinate b, const struct coordinate c);
         static uint8_t inside(const struct coordinate p, const struct coordinate a, const struct coordinate b, const struct coordinate c);
     };

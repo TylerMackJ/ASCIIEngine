@@ -43,13 +43,31 @@ void Renderer::Triangle::changePoint(const int point, const struct coordinate po
         minY = pos.y;
 }
 
+struct Renderer::coordinate Renderer::Triangle::getCenter()
+{
+    return {(this->point[0].x + this->point[1].x + this->point[2].x) / 3.0, (this->point[0].y + this->point[1].y + this->point[2].y) / 3.0};
+}
+
 void Renderer::Triangle::rotateAround(const struct coordinate point, const double radian) 
 {
     for (int i = 0; i < 3; i++)
     {
-        double xNew = (this->point[i].x - point.x) * cos(radian) - (this->point[i].y - point.y) * sin(radian) + point.x;
-        double yNew = (this->point[i].x - point.y) * sin(radian) + (this->point[i].y - point.y) * cos(radian) + point.y;
-        this->changePoint(i, {xNew, yNew});
+        double x = this->point[i].x;
+        double y = this->point[i].y;
+
+        double s = sin(radian);
+        double c = cos(radian);
+
+        x -= point.x;
+        y -= point.y;
+
+
+        double xNew = x * c - y * s;
+        double yNew = x * s + y * c;
+
+        
+
+        this->changePoint(i, {xNew + point.x, yNew + point.y});
     }
 }
 
