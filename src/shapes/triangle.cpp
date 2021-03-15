@@ -1,6 +1,6 @@
 #include <cmath>
 
-#include "engine.h"
+#include "../engine.h"
 
 Renderer::Triangle::Triangle(struct coordinate* points) : point(points)
 {
@@ -43,11 +43,6 @@ void Renderer::Triangle::changePoint(const int point, const struct coordinate po
         minY = pos.y;
 }
 
-struct Renderer::coordinate Renderer::Triangle::getCenter()
-{
-    return {(this->point[0].x + this->point[1].x + this->point[2].x) / 3.0, (this->point[0].y + this->point[1].y + this->point[2].y) / 3.0};
-}
-
 void Renderer::Triangle::rotateAround(const struct coordinate point, const double radian) 
 {
     for (int i = 0; i < 3; i++)
@@ -69,6 +64,11 @@ void Renderer::Triangle::rotateAround(const struct coordinate point, const doubl
 
         this->changePoint(i, {xNew + point.x, yNew + point.y});
     }
+}
+
+struct Renderer::coordinate Renderer::Triangle::getCenter()
+{
+    return {(this->point[0].x + this->point[1].x + this->point[2].x) / 3.0, (this->point[0].y + this->point[1].y + this->point[2].y) / 3.0};
 }
 
 

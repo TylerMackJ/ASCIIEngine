@@ -1,7 +1,7 @@
 SRCS := ${shell find ./src -name *.c*}
 
 all : bin/
-	g++ ${SRCS} -o bin/engine
+	g++ -O2 ${SRCS} -o bin/engine
 
 bin/ : 
 	mkdir bin

@@ -24,6 +24,19 @@ Renderer::Triangle& Renderer::tri(const struct coordinate c1, const struct coord
     return *t;
 }
 
+Renderer::Rectangle& Renderer::rect(const struct coordinate c1, const struct coordinate c2, const struct coordinate c3, const struct coordinate c4)
+{
+    struct coordinate* t1Points = new struct coordinate[3] { c1, c2, c4 };
+    struct coordinate* t2Points = new struct coordinate[3] { c2, c3, c4 };
+
+    Rectangle* r = new Rectangle(t1Points, t2Points);
+
+    this->triangles.push_back(r->tri[0]);
+    this->triangles.push_back(r->tri[1]);
+
+    return *r;
+}
+
 void Renderer::draw() const 
 {
     const int frameSize = this->getHeight() * this->getWidth();
@@ -44,9 +57,9 @@ void Renderer::draw() const
     // Draw triangles
     for (Triangle* const tri : this->triangles)
     {
-        for(int x = tri->minX > 0 ? tri->minX : 0; x <= tri->maxX && x <= this->getWidth(); x++) 
+        for(int x = tri->minX > 0 ? tri->minX : 0; x <= tri->maxX && x < this->getWidth(); x++) 
         {
-            for(int y = tri->minY > 0 ? tri->minY : 0; y <= tri->maxY && y <= this->getHeight(); y++)
+            for(int y = tri->minY > 0 ? tri->minY : 0; y <= tri->maxY && y < this->getHeight(); y++)
             {
                 if (Renderer::Triangle::inside({(double)x, (double)y}, tri->point[0], tri->point[1], tri->point[2]))
                 {
@@ -63,9 +76,11 @@ void Renderer::draw() const
         }
         */
         // Draw triangle center for debug
+        /*
         struct coordinate center = tri->getCenter();
         if (center.x >= 0 && center.x < this->getWidth() && center.y >= 0 && center.y < this->getHeight())
-            frame[(int)tri->getCenter().x + (this->getWidth() * (int)tri->getCenter().y)] = '*';
+            frame[(int)tri->getCenter().x + (this->getWidth() * (int)tri->getCenter().y)] = '*';  if (tri->getCenter().x >= 0 && )
+        */
     }
 
     // Draw frame
